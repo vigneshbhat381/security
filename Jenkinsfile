@@ -1,4 +1,6 @@
 node  {
+    def Author = 'Atin Singh'
+
     stage('Clean WS') {
         sh 'echo "Cleaning WorkSpace"'
         cleanWs();
@@ -15,6 +17,7 @@ node  {
      stage('Test') {
         withMaven(jdk: 'jdk8', maven:'m3') {
             sh 'mvn test'
+
         }
     }
 
@@ -28,6 +31,9 @@ node  {
         withMaven(jdk: 'jdk8', maven:'m3') {
             sh 'mvn install'
         }
+    }
+    stage('Who Completed') {
+        sh "echo ${Author}"
     }
 
 }
