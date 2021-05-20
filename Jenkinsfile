@@ -14,6 +14,12 @@ node  {
     }
      stage('Test') {
         withMaven(jdk: 'jdk8', maven:'m3') {
+            sh 'mvn test'
+        }
+    }
+
+     stage('Package') {
+        withMaven(jdk: 'jdk8', maven:'m3') {
             sh 'mvn package'
         }
     }
