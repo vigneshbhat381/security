@@ -20,6 +20,18 @@ node  {
 
         }
     }
+     stage('Package') {
+        withMaven(jdk: 'jdk8', maven:'Maven3') {
+            sh 'mvn package'
+        }
+    }
+
+    stage('Upload To Artifactory') {
+        withMaven(jdk: 'jdk8', maven:'Maven3') {
+            sh 'mvn install'
+        }
+    }
+    
 
     
     stage('Who Completed') {
