@@ -24,4 +24,10 @@ node  {
         }
     }
 
+    stage('Upload To Artifactory') {
+        withMaven(jdk: 'jdk8', maven:'m3') {
+            sh 'mvn install'
+        }
+    }
+
 }
