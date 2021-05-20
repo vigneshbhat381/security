@@ -1,5 +1,5 @@
 node  {
-    def Author = 'vignesh bhat'
+    def Author = 'vignesh'
 
     stage('Clean WS') {
         sh 'echo "Cleaning WorkSpace"'
@@ -21,17 +21,7 @@ node  {
         }
     }
 
-     stage('Package') {
-        withMaven(jdk: 'jdk8', maven:'Maven3') {
-            sh 'mvn package'
-        }
-    }
-
-    stage('Upload To Artifactory') {
-        withMaven(jdk: 'jdk8', maven:'Maven3') {
-            sh 'mvn install'
-        }
-    }
+    
     stage('Who Completed') {
         sh "echo ${Author}"
     }
