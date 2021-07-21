@@ -8,7 +8,7 @@ pipeline{
         pollSCM('* * * * *')
     }
     tools{
-        maven  'm3'
+        maven  'Maven3'
         jdk 'jdk11'
     }
 
