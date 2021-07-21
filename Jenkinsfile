@@ -1,28 +1,49 @@
-node  {
-    def Author = 'vignesh bhat'
+pipeline{
+    agent any
+    options { 
+        quietPeriod(30) 
+     }
+   
+    triggers {
+        pollSCM('* * * * *')
+    }
+    tools{
+        maven  'm3'
+        jdk 'jdk11'
+    }
 
-    stage('Clean WS') {
-        sh 'echo "Cleaning WorkSpace"'
-        cleanWs();
+    stages {
+        stage('Clean Ws') {
+            steps{
+                cleanWs()
+            }
+        }
+        stage('Git CheckoutOut'){
+            steps{
+                checkout scm
+            }
+        }
+       stage ('Maven Package'){
+            steps{
+                sh 'mvn package'
+            }
+        }
+       stage('Build Docker Image') {
+             steps {
+                 sh 'docker login -u vigneshbhat381 -p "Vignesh18!"' 
+                 sh 'docker build -t vignesh/my_app:1.0.0 .'
+                 
+             }
+        }
+        
+         stage('Push Docker Image'){
+             steps {
+                
+                 sh 'docker push vignesh/my_app:1.0.0'
+             }
+         }
+         
 
-    }
-    stage('Declartive Checkout'){
-        checkout scm;
-    }
-    stage('Compile') {
-        withMaven(jdk: 'jdk8', maven:'Maven3') {
-            sh 'mvn compile'
-        }
-    }
-    
-     stage('Package') {
-        withMaven(jdk: 'jdk8', maven:'Maven3') {
-            sh 'mvn package'
-        }
-    }  
-    
-    stage('Who Completed') {
-        sh "echo ${Author}"
-    }
+}
 
 }
