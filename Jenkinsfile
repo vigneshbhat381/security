@@ -30,7 +30,7 @@ pipeline{
         }
        stage('Build Docker Image') {
              steps {
-                 sh 'docker login -u vigneshbhat381 -p "Vignesh18!"' 
+                 sh 'docker login -u vigneshbhat12 -p "Vignesh18!"' 
                  sh 'docker build -t vignesh/my_app:1.0.0 .'
                  
              }
