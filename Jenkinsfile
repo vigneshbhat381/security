@@ -39,7 +39,7 @@ pipeline{
          stage('Push Docker Image'){
              steps {
                 
-                 sh 'docker push vignesh/my_app:1.0.0'
+                 sh 'docker push vigneshbhat12/my_app:1.0.0'
              }
          }
          
